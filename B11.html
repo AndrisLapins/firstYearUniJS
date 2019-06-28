@@ -1,0 +1,144 @@
+<!--
+Andris Lapiņš, al18011
+B11. Dots naturālu skaitļu intervāls [m,n]. Izdrukāt visus tos
+pirmskaitļu pārīšus, kuru starpība ir 2 (izmantojot  funkciju, kas
+pazīst pirmskaitli).
+Programma izveidota: 2018/09/20
+-->
+
+<html>
+    <head>
+        <title>Pirmskaitļi</title>
+        <meta charset="UTF-8">
+    </head>
+    <body>
+        <h1 id="end"></h1>
+        <p id="restart"></p>
+            <script>
+
+                var x;
+                var y;
+
+                //do {
+                    var n = Number(prompt("Ievadiet pirmo naturālo skaitli (n): "));
+                    var m = Number(prompt("Ievadiet otru naturālo skaitli (m): "));
+
+                    //Kļūdu meklēšana
+                    if (m % 1 != 0 || n % 1 != 0 || m == 0 || n == 0 || m < 1 || n < 1 || isNaN(n) || isNaN(m))
+                    {
+                        window.alert("Lūdzu ievadiet tikai naturālus skaitļus! (Skaitļi ar komatu, negatīvi skaitļi, burti un nulles nav naturāli skaitļi)");
+                    } else if (m == n) {
+                        window.alert("Skaitļi ir vienādi. Nebuus iespējams atrast pirmskaitļu pārīšus, kuru starpība ir 2.");
+                    } else if (m == n + 1 || n == m + 1) {
+                        window.alert("Starpība starp šiem skaitļiem pat nav 2!");
+                    } else if (m < n) {
+                        window.alert("Pirmajam skaitlim intervālā nevajadzētu būt lielākam");
+                    } else {
+
+                        //document.getElementById("end").innerHTML = "Pirmskaitļi intervālā starp " + n + " un " + m + " ir: ";
+                        console.log("Pirmskaitļi intervālā starp " + n + " un " + m + " ir: ");
+                        primeN( n, m);
+                        //console.log("0");
+
+
+                        function primeN( x, y)
+                        {
+                            var flag;
+                            var s;
+
+                            var array1 = [];
+                            var array2 = [];
+                            var k1 = 0;
+                            var k2 = 0;
+
+                            var skaits = 0;
+                            //Šeit tiek saglabāti pirmskaitļi, tos izlaižot cauri funkcijai
+                            for (var i = x+1; i < y; ++i)
+                            {
+                                flag = checkPrimeNumber(i);
+                                if (flag == true)
+                                {
+                                    array1.push(i);
+                                    array2.push(i);
+
+                                    skaits++;
+
+                                    //array1[k1] = i;
+                                    //array2[k2] = i;
+
+                                    //k1++;
+                                    //k2++;
+                                }
+                            }
+                            //Šeit tiek izvadīts rezultāts (pirmskiatļi ar starpību 2) vai noliedzoša atbilde
+                            if (skaits == 0 )
+                            {
+                                console.log("Nav tādu pirmskaitļu pārīšu šajā intervālā.");
+                            } else {
+                                for (var a = 0; a < y; ++a)//[pre] - a = 0
+                                {
+                                    for (var b = 0; b < y; ++b)
+                                    {
+                                        if (array1[b] == array2[a] + 2)
+                                        {
+                                            console.log(array1[a] + " un " + array2[b] + ";");
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        
+                        //funckija, kas pārbauda katru skaitli intervālā, vai ir pirmskaitlis
+                        function checkPrimeNumber( n)
+                        {
+                           if (n < 2) return false;
+
+                           var f = Math.floor(n/2);
+
+                           for (var i=2; i <= f; i++)
+                                if (n%i==0) return false;
+                            return true;
+                        }
+                    }
+
+                /*var ok = Number(prompt("Ievadi (1), lai turpinaatu programmu. Ievadi (0), lai beigtu."));
+
+                } while (ok == 1);*/
+
+                document.getElementById("end").innerHTML = "Apskatiet rezultātus konsoles logā.";
+                document.getElementById("restart").innerHTML = "Atsvaidziniet lapu, lai restartētu programmu!";
+
+            </script>
+        </body>
+</html>
+
+<!-----------------------------------------------------------------------------------------------------------
+    Ievads      | Programmas vēlamā reakcija |               Rezultāts C++
+    -----------------------------------------------------------------------------
+    2 un 9      3 un 5; 5 un 7;                                 + (Pats izrēķināju)
+    -----------------------------------------------------------------------------
+    9 un 2      "Pirmajam skaitlim intervālā                    +
+                nevajadzētu būt lielākam"                    
+    ------------------------------------------------------------------------------
+    4 un 5      "Starpība starp šiem skaitļiem                  +
+                pat nav 2!"
+    ------------------------------------------------------------------------------
+    k un 1      Lūdzu ievadiet tikai naturālus skaitļus!        +
+                (Skaitļi ar komatu, negatīvi skaitļi,
+                burti un nulles nav naturāli skaitļi)"
+    ------------------------------------------------------------------------------
+    6.5 un 2    Lūdzu ievadiet tikai naturālus skaitļus!        +
+                (Skaitļi ar komatu, negatīvi skaitļi,
+                burti un nulles nav naturāli skaitļi)"
+    ------------------------------------------------------------------------------
+    5 un 5      "Skaitļi ir vienādi. Nebūs iespējams atrast     +
+                pirmskaitļu pārīšus, kuru starpība ir 2"
+    ------------------------------------------------------------------------------
+    -5 un 43    Lūdzu ievadiet tikai naturālus skaitļus!        +
+                (Skaitļi ar komatu, negatīvi skaitļi,
+                burti un nulles nav naturāli skaitļi)"
+    ------------------------------------------------------------------------
+    13 un 17   "Nav tādu pirmskaitļu pārīšu šajā intervālā."    +
+
+
+--------------------------------------------------------------------------------------------------------------->

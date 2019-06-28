@@ -1,0 +1,451 @@
+<style>
+	body {
+		font-size:12pt;
+		font-family:sans-serif;
+		font-style:normal;
+	}
+</style>
+
+<script>
+function gid(pid) {
+	return document.getElementById(pid);
+}
+</script>
+
+<h2> A Few JavaScript Tips </h2> 
+
+&#10148; Here we give a few JavaScript tips that can refresh your previous knowledge or give some ideas how to implement certain tasks.
+<br><br>
+&#10148; There is a self-study task at the end. You may also start from there.
+
+<h3> Identifying HTML Elements </h3>
+
+Each HTML element can be identified by its "id" attribute.
+<br><br>
+IDs can be artibrary and should be defined uniquely by the programmer. 
+<br><br>
+Here are a few examples:
+<pre>
+	&lt;div id="div1"> ...  &lt;/div>
+
+	&lt;input type="text" id="mytext">
+
+	&lt;table id="maintable">
+		&lt;tr id="row1">
+			&lt;td id="cell-1-1"> ... &lt;/td> 
+			&lt;td id="cell-1-2"> ... &lt;/td> 
+			&lt;td id="cell-1-3"> ... &lt;/td>
+		&lt;/tr>
+	&lt;/table>
+</pre>
+
+
+<h3> Accesing HTML Elements </h3>
+
+Each HTML element can be accessed by JavaScript using its "id". 
+<br><br>
+We use the method "document.getElementById('id-of-the-element')".
+<br><br>
+We create a variable referring to each HTML element given above.
+<pre>
+	&lt;script>
+	mydiv = document.getElementById("div1");
+	t1 = document.getElementById("mytext")
+	tbl = document.getElementById("maintable") 
+	&lt;/script>
+</pre>
+In order to shorten our code, we can define this short-named function at the beginning of the document:
+<pre>
+	&lt;script>
+	function gid(elementId) {
+		return document.getElementById(elementId);
+	}
+	&lt;/script>
+</pre>
+Thus, we create variables for the cells of the table as follows:
+<pre>
+	&lt;script>
+	c1-1 = gid("cell-1-1");
+	c1-2 = gid("cell-1-2");
+	c1-3 = gid("cell-1-3");
+	&lt;/script>
+</pre>
+
+<h3> Changing the properties of HTML Elements </h3>
+
+The properties of a HTML element can be changed in JavaScript.
+<br><br>
+Consider the "div" element defined above.
+<pre>
+	&lt;script>
+	mydiv.style.color = "red";
+	mydiv.style.backgroundColor= "#00ff00";
+	mydiv.style.fontFamily = "arial";
+	mydiv.style.width = "300px";
+	mydiv.id = "newdiv";
+	mydiv.innerHTML= "I am the new content";
+	&lt;/script>
+</pre>
+By a quick search, we can see how to access the properties of an HTML element in JavaScript.
+<h3> Browser developer tools </h3>
+
+We use browser developer tools for debugging our codes.
+<br><br>
+During development, it is recommeded to keep them open.
+<br><br>
+The short cut (Crome, Firefox, Edge): CONTROL+SHIFT+I 
+<br><br>
+It is a common practice to check some intermediate results by writing them to console (one of the developer tools).
+<pre>
+	&lt;script>
+	console.log("the id of div is"+mydiv.id);
+	&lt;/script>
+</pre>
+In order to shorten our code, we can define this short-named function at the beginning of the document:
+<pre>
+	&lt;script>
+	function clog(text) {
+		return console.log(text);
+	}
+	&lt;/script>
+</pre>
+
+<h3> Variable scopes in JavaScript </h3>
+
+JavaScript has many flexibilities, and this usually cause different bugs that may not be easily cought.
+<br><br>
+Sometimes, we use the same variable names (e.g., the variables used in loops) in the different scopes. 
+<br><br>
+In order <b>not</b> to interfere with a higher level (global) variable with the same name, we should explicitly use keyword "var" before defining new (local) variables.
+<pre>
+	&lt;script>
+	
+	i = 10; // this is a global variable
+	
+	function myfunc() {
+		i = 5; // the value of the above variable has changed
+	}
+	
+	function yourfunc() {
+		var i = 8; // this is a new variable in the scope of this function
+		// it is different than the above variable 
+	}
+	&lt;/script>
+</pre>
+We recommend always to use "var" before iteration variables.
+<br><br>
+In the following code, if we remove the second "var", then we will experience of infinite loop.
+<br><br>
+(You may test the code as it is, and then after removing the second "var".)
+<pre>
+	&lt;script>
+	for (var i=2;i<40;i++) { 
+		// we define a variable with name "i".
+		if (isPrime(i)==true) { 
+			clog(i+" is a prime number :-)");
+		}
+	}
+	function isPrime(pnumber) {
+		for (var i=2;i&lt;pnumber;i++){ 
+		// We define a variable name "i" by using "var", and so it is different than the above variable "i".
+		// If we do not use "var", then "i" values in this and above loops will interfere. 
+		// If you test the code by removing "var" here, and then you will experience of infinite loop. 
+			if (pnumber % i == 0) {
+				return false;
+			}
+		}
+		return true;
+	}
+	&lt;/script>
+</pre>
+
+<h3>Adding and removing rows and cells</h3>
+
+By using JavaScript, we can add and remove HTML elements. 
+<br><br>
+We can delete all rows of the table with id "mytable" by using the following function:
+<pre>
+	&lt;script>		
+	function deleteAllRows() {
+		var myTableObj=gid("mytable");
+		var numberOfRows=myTableObj.rows.length;
+		console.log(numberOfRows);
+		for (var i=0;i&lt;numberOfRows;i++) {
+			myTableObj.deleteRow(0);
+		}
+	}
+	&lt;/script>
+</pre>
+Then, we can add  a new row with new three cells by using the following function:
+	<pre>
+	&lt;script>
+	function addThreeCells() {
+		var myTableObj=gid("mytable");
+		var numberOfRows=myTableObj.rows.length;
+		var newRow=myTableObj.insertRow(numberOfRows);
+		for(var i=0;i<3;i++) {
+			var newCell=newRow.insertCell(i);
+			newCell.innerHTML="I am a new cell with i = "+i;
+			newCell.style.backgroundColor="#"+3i+""+3i+"0000";
+			newCell.id = "cell-1-"+i;
+		}
+	}
+	&lt;/script>
+</pre>
+
+<h3>Creating a new event</h3>
+
+We can easily create an event (action) for an HTML element by using JavaScript.
+<br><br>
+Suppose that we have an HTML element with id "myelement". 
+<br><br>
+We create an onclick event by calling a function named "myClick". 
+<pre>
+	&lt;script>
+	document.getElementById("myelement").onclick = function() {myClick(this)};
+	&lt;/script>
+</pre>
+"this" is a specific keyword that refers to the object it belongs to. 
+<br><br>
+Here we pass the HTML element to this function so that we can directly access to this HTML element from this function.
+<br><br>
+Now, we define the function named "myClick".
+<pre>
+	&lt;script>
+	function myClick(obj) {
+		obj.innerHTML = "new content";
+		console.log(obj.id);
+		obj.style.color = "blue";
+	}
+	&lt;/script>
+</pre>
+
+<h3> Arrays in JavaScript </h3>
+
+Array is a special variable that can store multiple values.
+<br><br>
+Each value is accessed by its index starting from 0.
+
+<pre>
+	&lt;script>
+	var myArray=new Array(5);
+	myArray[0]="Andris";
+	myArray[1]="Ambainis";
+	myArray[2]=1975;
+	myArray[3]=Daugavpils;
+	myArray[4]="Computer Scientist";
+
+	for (var i=0;i&lt;myArray.length;i++) {
+		console.log(myArray[i]);
+	}
+	
+	// the length (size) of the an array
+	console.log(myArray.length);
+	&lt;/script>
+</pre>
+An array content can also be gradually increased. 
+<pre>
+	&lt;script>
+		myArray[myArray.length] = "I am new";
+		myArray[myArray.length] = "I am newer";
+		myArray[myArray.length] = "I am the newest";
+	&lt;/script>
+</pre>
+
+<h3> Double arrays in JavaScript </h3>
+
+Each element of an array can also store a new array.
+<pre>
+	&lt;script>
+	var myDoubleArray=new Array(3);
+
+	myDoubleArray[0]=new Array(4);
+	myDoubleArray[0][0]=21;
+	myDoubleArray[0][1]=33;
+	myDoubleArray[0][2]=45;
+	myDoubleArray[0][3]=61;
+	&lt;/script>
+</pre>
+Any array can also be defined alternatively as follows:
+<pre>
+	&lt;script>
+	myDoubleArray[1]=[3,8,5,'Latvia','Ogre',12];
+	myDoubleArray[2]=new Array('Cesis','Sigulda');
+	&lt;/script>
+</pre>
+Now we have an array of size 3 named "myDoubleArray". 
+<br>
+Its first element is an array of size of 4.
+<br>
+Its second element is an array of size 5. 
+<br>
+Its third element is an array of size 2.
+<br><br>
+We can print all elements in console as follows:
+
+<pre>
+	&lt;script>
+	for (var i=0;i&lt;myDoubleArray.length;i++) {
+		console.log("INDEX "+i+":");
+		for (var j=0;j&lt;myDoubleArray[i].length;j++) {
+			console.log(j+"-->"+myDoubleArray[i][j]);
+		}
+	}
+	&lt;/script>
+</pre>
+
+<h3>Timing Events in JavaScript</h3>
+
+In JavaScript, we can easily execute a block of codes after a specified number of milliseconds.
+<br><br>
+We use the method "<i>setTimeout(.)</i>". 
+<br><br>
+Please check the console for the result of the following example.
+<br><br>
+<input type="button" value="Call me after a second" onclick="callMe()">
+<pre>
+	&lt;input type="button" value="Call me after a second" onclick="callMe()">
+	
+	&lt;script>
+	var numberOfCall = 0;
+	var callEvent;
+	function callMe() {
+		numberOfCall++;
+		console.log("The number of call is "+numberOfCall);
+		callEvent=setTimeout(callMe,1000);
+	}
+	&lt;/script>
+</pre>
+Remark that the function "callMe()" also calls itself after a second, and so we have an infinite loop.
+<br><br>
+We use the method "clearTimeout(.)" to remove a scheduled event.
+<br><br>
+<input type="button" value="Stop the calls" onclick="clearTimeout(callEvent)">
+<pre>
+	&lt;input type="button" value="Stop the calls" onclick="clearTimeout(callEvent)">
+</pre>
+You may play with these two buttons by also checking the results in console.
+
+<br><br>
+
+<hr>
+
+<h2> Self-study </h2>
+
+&#10148; Design the following simple game (check the rules by playing once or twice).
+<br><br>
+
+<input type="button" value="PRESS ME" onclick="resetGame()"> to start the game
+<br><br>
+<table id="gametable"> </table>
+<br><br><br><br><br><br><br><br><br><br><br><br>
+
+
+<script>
+var numberOfCall = 0;
+var callEvent;
+function callMe() {
+	numberOfCall++;
+	console.log("The number of call is "+numberOfCall);
+	callEvent=setTimeout(callMe,1000);
+}
+</script>
+
+
+
+<script>
+
+var myDoubleArray=new Array(3);
+
+myDoubleArray[0]=new Array(4);
+myDoubleArray[0][0]=21;
+myDoubleArray[0][1]=33;
+myDoubleArray[0][2]=45;
+myDoubleArray[0][3]=61;
+
+myDoubleArray[1]=[3,8,5,'Latvia','Ogre',12];
+myDoubleArray[2]=new Array('Cesis','Sigulda');
+
+for (var i=0;i<myDoubleArray.length;i++) {
+	console.log("INDEX "+i+":");
+	for (var j=0;j<myDoubleArray[i].length;j++) {
+		console.log(j+"-->"+myDoubleArray[i][j]);
+	}
+}
+
+</script>
+
+
+<script>
+
+var gameTable=gid("gametable"); 
+
+var pickedNumber;
+var numberOfGuess=0;
+var currentGuess=-1;
+
+var recommendation="";
+
+function resetGame() {
+	gameTable.innerHTML="";
+	pickedNumber=Math.floor(Math.random() * Math.floor(100));
+	var newRow=gameTable.insertRow(0);
+	var newCell=newRow.insertCell(0);
+	newCell.innerHTML="I picked a number between 0 and 99. Please guess this numbers!";	
+	numberOfGuess=1;
+	currentGuess=-1
+	prepareGuess();
+}
+
+function prepareGuess() {
+	if (gameTable.rows.length==1) {
+		var newRow=gameTable.insertRow(1);
+		var newCell=newRow.insertCell(0);		
+	}
+	else {
+		var newCell=gameTable.rows[1].cells[0];
+	}
+	newCell.innerHTML="Your guess #"+numberOfGuess+": <input type='text' size='2' id='guess' onkeydown='if (event.keyCode == 13) checkGuess()'><input type='button' value='check' onclick='checkGuess()'>";
+	gid("guess").focus();
+}
+
+function checkGuess() {
+	if (gid("guess").value.length==0) {
+		alert("please enter an integer between 0 and 99");
+		gid("guess").focus();
+		return false;
+	}
+	var currentGuess=1*gid("guess").value;
+	console.log(currentGuess);
+	if (Number.isInteger(currentGuess)==false) {
+		alert("please enter an integer between 0 and 99");
+		gid("guess").focus();
+		return false;
+	}
+	if (currentGuess < 0 || currentGuess > 99) {
+		alert("please enter an integer between 0 and 99");
+		gid("guess").focus();
+		return false;
+	}
+	if (currentGuess==pickedNumber) {
+		var newCell=gameTable.rows[1].cells[0];
+		newCell.innerHTML="<b>Congratulations!</b> After "+numberOfGuess+" attempt(s) you hit my guess "+pickedNumber+" :-)";
+		newCell.style.color="green";
+		newCell.style.fontSize="16px";
+		return true;
+	}
+	else if (currentGuess < pickedNumber) {
+		recommendation="INCREASE"
+	}
+	else {
+		recommendation="DECREASE"
+	}
+	var newRow=gameTable.insertRow(2);
+	var newCell=newRow.insertCell(0);
+	newCell.innerHTML="Attempt "+numberOfGuess+": "+currentGuess+". <b>"+recommendation+"</b> YOUR GUESS PLEASE!";
+	newCell.style.color="red";
+	numberOfGuess++;
+	prepareGuess();
+}
+
+</script>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<!--
+Enter your name, surname and student id number here
+-->
+<html>
+    <head>
+        <title>Nobel Prize Laureates</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script type="text/javascript" src="laureate.js"></script>
+        <script src="jquery-3.3.1.min.js" type="text/javascript"> </script>
+        <style>
+            table, td, th { border: 1px solid gray; border-collapse: collapse;}
+        </style>
+    </head>
+    <body>
+        <h1>Nobel Prize Laureates</h1>
+        <div>
+          <div>
+            <label for="category-select">Category:</label>
+            <select id="category-select">
+
+            </select>
+          </div>
+          <div>
+            <label for="year-from">Year from:</label>      
+            <input type="text" id="year-from">
+          </div>    
+          <div>
+            <label for="year-until">Year until:</label>      
+            <input type="text" id="year-until">
+          </div>     
+          <div>
+            <label for="gender-select">Gender:</label>
+            <select id="gender-select">
+				<option value="both" label=" "></option>
+				<option value="f">female</option>
+				<option value="m">male</option>
+			</select>
+          </div>     
+          <div>
+            <label for="country-select">Country:</label>      
+            <select id="country-select"></select>
+          </div>     
+          <div>
+            <label for="search">Laureate/Motivation:</label>      
+            <input type="search" id="search">
+          </div>
+          <div id="buttons">
+            <button id="show-list">Show list</button>
+            <button id="hide">Hide motivation</button>      
+          </div>
+            <table>
+           
+          </table>
+        </div>
+    </body>
+    <script type="text/javascript" src="homework3.js"></script>
+</html>

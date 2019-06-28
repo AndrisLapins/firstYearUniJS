@@ -1,0 +1,175 @@
+<!-----------------------------
+Andris Lapiņš, al18011
+A11. Ar virsotņu koordinātēm dots trijstūris. Izrēķināt tā perimetru un
+laukumu.
+Programma izveidota: 2018/09/17
+------------------------------->
+<html>
+    <h1 id="end"></h1>
+    <button onClick="calc()">Click</button>
+    <p>Lorem<b>Ipsum</b> ispum &gt;<strong><u>dasdasaa</u>Ipsum</strong>umum<em>dadsakkkkkkkkkkk</em><ins>aaaaaaaaaaaa</ins></p>
+    <cite>dsasadsad</cite>
+    <label for="
+test
+">Name,
+surname</label>
+<input type="text" 
+id="
+test
+"/>
+<input 
+type="file" 
+accept="
+.gif,.png,video
+/*">
+<select
+name="subject">
+<
+optgroup
+label="Exact">
+<option
+value="Mate01">Mathematics</option>
+<option
+value="Fiz09">Physics</option>
+</
+optgroup
+>
+<optgroup
+label="Languages">
+<option
+value="Angl03">English</option>
+</optgroup>
+</select>
+<textarea name="field_name">Default text</textarea>
+
+        <audio>
+            <!-- <source src="horse.ogg" type="audio/ogg"> -->
+            <source src="Feduk - Моряк (prod. by yangy).mp3" type="audio/mpeg">
+        </audio>
+        <details>
+<summary>
+This is the summary
+</summary>
+<p>
+Here comes the detailed information.
+</p>
+</details>
+<p>Download
+    progress:
+    <progress value="14"
+    max="50">
+    28%
+    </progress>
+    </p>
+    <p>It is <meter value="18" min="
+        -
+        36" 
+        max="36" optimum="23">quite
+        warm</meter> outside.</p>
+        <p>Published on <time datetime="201
+            6
+            -
+            03
+            -
+            0
+            1
+            "> 
+            March 
+            1st
+            ,
+            201
+            6
+            </time>.</p>
+            <dfn title="Hypertext Markup Language">HTML</dfn> is the standard 
+markup language used to create web pages.
+
+        <script>
+
+            function calc() {
+            do {
+            // definēt koordinātes
+            var x1 = Number(prompt("Ievadi x1 koordinaati: "));
+            var y1 = Number(prompt("Ievadi y1 koordinaati: "));
+            var x2 = Number(prompt("Ievadi x2 koordinaati: "));
+            var y2 = Number(prompt("Ievadi y2 koordinaati: "));
+            var x3 = Number(prompt("Ievadi x3 koordinaati: "));
+            var y3 = Number(prompt("Ievadi y3 koordinaati: "));
+            
+            //Aprēķina laukumu no ievadītajām koordinātēm
+            function calcArea ()
+            {
+                var area = x1*(y2-y3) + x2*(y3-y1) + x3*(y1-y2);
+                console.log(area);
+                area = area / 2.0;
+                area = Math.abs(area);
+                
+                //Pārbauda vai laukuma rezultāts nav NaN
+                if (isNaN(area)) {
+                    window.alert("Nepareizi datu tipi konstateeti!(Laukums)");
+                } else {
+                    window.alert("Trijstuura laukums: " + area);
+                }
+                
+            }
+            
+            //Perimetra aprēķināšana no ievādītajām koordinātām
+            function calcPer()
+            {
+                var mala1 = (x2-x1)*(x2-x1) + (y2-y1)*(y2-y1);
+                mala1 = Math.sqrt(mala1);
+
+                var mala2 = (x3-x2)*(x3-x2) + (y3-y2)*(y3-y2);
+                mala2 = Math.sqrt(mala2);
+
+                var mala3 = (x3-x1)*(x3-x1) + (y3-y1)*(y3-y1);
+                mala3 = Math.sqrt(mala3);
+
+                var per = mala1 + mala2 + mala3;
+                
+                //Pārbauda vai perimetra rezultāts nav NaN
+                if (isNaN(per)) {
+                    window.alert("Nepareizi datu tipi konstateeti!(Perimetrs)");
+                } else {
+                    window.alert("Trijstuura perimetrs: " + per);
+                }
+            }
+            
+            //Tiek deklarētas funkcijas
+            calcArea();
+            calcPer();
+            
+            var ok = Number(prompt("Ievadi (1), lai turpinaatu programmu. Ievadi (0), lai beigtu."));
+
+            } while(ok == 1);
+
+            document.getElementById("end").innerHTML = "Atsvaidziniet lapu, lai atsaaktu programu.";
+            
+            }
+
+        </script>  
+</html>
+
+<!-----------------------------------------------------
+    Ievads | Programmas vēlamā reakcija | Rezultāts C++
+    ---------------------------------------------------
+    x1: 10      "Laukums: 200"                  +
+    y1: 10      "Perimetrs: 68.2843"            +
+    x2: 10
+    y2: 30
+    x3: 30
+    y3: 10
+    ---------------------------------------------------
+    x1: -10      "Laukums: 800"                  +
+    y1: 10       "Perimetrs: 136.5685424949238"  +
+    x2: -10
+    y2: -30
+    x3: 30
+    y3: 10
+    ----------------------------------------------------
+    x1: k      "Nepareizi datu tipi            +
+    y1: p      konstateeti!(Laukums)"
+    x2: j      "Nepareizi datu tipi
+    y2: a      konstateeti!(Perimetrs)"
+    x3: d
+    y3: das
+------------------------------------------------------------>

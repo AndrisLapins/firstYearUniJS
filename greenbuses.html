@@ -1,0 +1,101 @@
+<!--
+Author: Andris Lapins
+Project started: 12/01/2019
+Last time modified: 16/01/2019
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="main.css">
+    <link rel="icon" href="icons/Bus-Icon-Green-2.png">
+    <script src="jquery-3.3.1.min.js"></script>
+    <title>Rigas Turists</title>
+</head>
+<body>
+    <header>
+        <img src="images/IMG_6117vers2.jpg" alt="Our green bus in the middle of the Town Hall Square">
+    </header>
+
+    <nav>
+        <ul id="nav-btns">
+            <li><a href="greenbuses.html"><img src="icons/homeicon.png" alt="Home button"></a></li>
+            <li><a href="commentsection.html"><h2 id="cSec">Comment section</h2></a><li>
+        </ul>
+        <ul id="nav-flags">
+            <li><img src="flags/latvia-flag-icon-64.png" alt="Latvian" onclick="langChangeLv()"></li>
+            <li><img src="flags/russia-flag-icon-64.png" alt="Russian" onclick="langChangeRus()"></li>
+            <li><img src="flags/united-kingdom-flag-icon-64.png" alt="English" onclick="langChangeEn()"></li>
+            <li><img src="flags/germany-flag-icon-64.png" alt="German" onclick="langChangeGer()"></li>
+            <li><img src="flags/spain-flag-icon-64.png" alt="Spanish" onclick="langChangeSp()"></li>
+            <li id="floatrow"><img src="flags/italy-flag-icon-64.png" alt="Italian" onclick="langChangeIt()"></li>
+            <li><img src="flags/sweden-flag-icon-64.png" alt="Swedish" onclick="langChangeSw()"></li>
+            <li><img src="flags/france-flag-icon-64.png" alt="French" onclick="langChangeFr()"></li>
+            <li><img src="flags/norway-flag-icon-64.png" alt="French" onclick="langChangeNor()"></li>
+            <li><img src="flags/finland-flag-icon-64.png" alt="French" onclick="langChangeFin()"></li>
+        </ul>
+    </nav>
+
+    <main>
+        <p id="maintext">Being in the heart of Riga - in the Old city, you have a unique possibility to look at city architecture moving on an Electrobus through narrow city streets. It follows a certain route and will present to you the most interesting and beautiful old town attractions and its history. During journey there is a possibility to hear the information of history of the Old city in 8 languages – Latvian, English, Russian, German, Spanish, Italian, Swedish, French, Norwegian and Finnish. The final stop of Electrobus is on the Dome Square. Simultaneously on excursion could go 23 passengers - 11 in the mover, and 12 - on the trailer. Duration of the journey is 35 minutes.</p>
+
+        <!-- Trigger the Modal -->
+        <img id="module" src="maps/route.jpg" alt="Route around the Old Riga">
+        <!-- The modal -->
+        <div id="myModal" class="modal">
+            <!-- Close button -->
+            <span class="close">&times;</span>
+            <!-- Modal conent (the image) -->
+            <img class="modal-content" id="img01" src="#" alt="#">
+            <!-- Modal caption -->
+            <!-- <div id="caption"></div> -->
+        </div>
+
+        <ul>
+            <li id="li1">Cost of one trip 7 EUR.</li>
+            <li id="li2">To Children till 7 years journey is for free, sitting on the lap of the adult.</li>
+            <li id="li3">In the families arriving at excursion with children till 7 years, parents pay only.</li>
+            <li id="li4">Tickets are got at the driver before a trip.</li>
+        </ul>
+        <p id="addtext">Electrobus begins work at working days from 10.00 till 22.00, on Sundays and celebratory days from 12.00 till 22.00. <i>Also there is a possibility to prolong the time.</i> <b>By ordering a group</b> trip it is possible to agree about concrete time of the beginning of travel.</p>
+
+        <h3>Guest experience:</h3>
+        <ol>
+            <li class="guestexp"><span class="authorspan">Santiago García from Spain:</span> The trip was wonderful. I and my family were able to emerge in the beauty of the city, bypassing the most popular and interesting sights and more.<br>The drivers are very friendly too. They speak mostly only in Latvian, English and Russian. Unfortunetly, if you dont know one of these languages, you cant ask additional questions. But the electronic guide has 10 languages for you to choose one of them; so its okay - you might know one of them.</li>
+            <li class="guestexp"><span class="authorspan">John Adley from UK:</span> Fully enjoyed the trip. Instead of walking hours around just sightseeing, we were able to just sit and listen, and enjoy the ride. As I and my wife are a bit too old now to run around a city paved by uneven bricks, a bus ride was just the thing we needed. <br>The bus has no windows, so you basically feel the city as walking around.</li>
+        </ol>
+        <hr>
+        <section id="form">
+            <h4>Data input test. Order the day for a group excursion.</h4>
+            <form name="mydata" action="http://naivist.net/form." onsubmit="return validate()" method="POST">
+                <h5>(Write in numbers)</h5>
+                <label>Date: </label>
+                <input type="text" name="date" required><br>
+                <label>Month: </label>
+                <input type="text" name="month" required><br>
+                <label>Year: </label>
+                <input type="text" name="year" required><br>
+                <label>Count of tourists: </label>
+                <input type="text" name="count" required><br>
+                <input type="submit" value="Submit"><br>
+            </form>
+        </section>
+        <div id="create">
+
+        </div>
+    </main>
+
+    <footer>
+        <h2 id="contacts">Contacts:</h2>
+        <p>SIA "Rīgas Tūrists"<p>
+        <p><span id="number">Phone number: </span>+371 29 356 999</p>
+        <p><span id="email">E-mail: </span><a href="mailto:info@rigasturists.lv">info@rigasturists.lv</a></p> <!--How to launch mail app by clicking the address?-->
+    </footer>
+    <script src="languages.js"></script>
+    <script src="data.js"></script>
+    <script src="domManip.js"></script>
+</body>
+</html>
